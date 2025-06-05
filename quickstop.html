@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quickstop</title>
+  <style>
+    /* Import web font + variables */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    :root {
+      --overlay-opacity: 0.8;
+      --accent-color: #4FC3F7;
+      --card-bg: rgba(0, 0, 0, 0.5);
+      --border-radius: 8px;
+      --transition-speed: 0.3s;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      color: #fff;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      background: url('media/background.jpg') center/cover no-repeat fixed;
+      position: relative;
+      line-height: 1.6;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, var(--overlay-opacity));
+      z-index: 0;
+    }
+    nav {
+      position: relative;
+      z-index: 1;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 1rem 1.5rem;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+    }
+    nav ul li + li {
+      margin-left: 1rem;
+    }
+    nav a {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: var(--border-radius);
+    }
+    .content {
+      flex: 1;
+      position: relative;
+      z-index: 1;
+      padding: 3rem;
+      max-width: 1320px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .section {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+    }
+    .section h2 {
+      font-size: 1.75rem;
+      color: var(--accent-color);
+      text-align: center;
+      margin-bottom: 1rem;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+    }
+    .subsection {
+      margin-top: 1.5rem;
+    }
+    .subsection h3 {
+      font-size: 1.3rem;
+      color: #fff;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      padding-bottom: 0.5rem;
+    }
+    .audio-list, .video-pair, .game-pair {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .audio-item, .video-item {
+      flex: 1 1 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .audio-item audio,
+    .video-item video {
+      width: 100%;
+      max-width: 500px;
+      border-radius: var(--border-radius);
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    }
+    .audio-item audio:hover,
+    .video-item video:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    }
+    .embedded-game {
+      margin: 1rem auto;
+      width: 100%;
+      max-width: 800px;
+      height: 600px;
+      border: 2px solid rgba(255,255,255,0.5);
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+    .embedded-game iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .download-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: var(--accent-color);
+      color: #000;
+      font-weight: 600;
+      border-radius: var(--border-radius);
+      text-decoration: none;
+      transition: background var(--transition-speed);
+    }
+    .download-link:hover {
+      background: #38b0e3;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      padding: 0.5rem;
+      border-radius: var(--border-radius);
+      text-decoration: none;
+      font-size: 0.9rem;
+      z-index: 1;
+      transition: background var(--transition-speed);
+    }
+    .back-to-top:hover {
+      background: rgba(255,255,255,0.4);
+    }
+    @media (max-width: 800px) {
+      .content {
+        padding: 1.5rem;
+        gap: 1rem;
+      }
+      .embedded-game {
+        height: 400px;
+      }
+    }
+    /* Poster hover / border styling */
+    .poster-item img {
+      border: 2px solid rgba(255,255,255,0.5);
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: transform var(--transition-speed),
+                  box-shadow var(--transition-speed);
+    }
+
+    .poster-item img:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.6);
+    }
+    /* Contents list styling */
+    .contents-list {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .contents-list li a {
+      color: #4FC3F7;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color var(--transition-speed);
+    }
+    .contents-list li a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body id="top">
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="quickstop.html">Quickstop</a></li>
+      <li><a href="University.html">University</a></li>
+      <li><a href="College.html">College</a></li>
+      <li><a href="PreCollege.html">Pre-College</a></li>
+      <li><a href="Personal.html">Personal</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+
+  <div class="content">
+    <!-- CONTENTS SECTION -->
+    <div class="section">
+      <h2>Contents</h2>
+      <ul class="contents-list">
+        <li><a href="#music">Music</a></li>
+        <li><a href="#sound-design">Sound Design</a></li>
+        <li><a href="#game-design">Game Design</a></li>
+        <li><a href="#presentations">Live Sound & Embedded Systems</a></li>
+        <li><a href="#posters">MIR & Dissertation Posters</a></li>
+        <li><a href="#dissertation">Dissertation</a></li>
+      </ul>
+    </div>
+
+    <!-- MUSIC SECTION -->
+    <div class="section" id="music">
+      <h2>Music</h2>
+
+      <div class="subsection">
+        <h3>University (Pro Tools)</h3>
+        <div class="audio-list">
+          <div class="audio-item">
+            <p><strong>Noone Knows (Cover)</strong><br><em>Rock Cover</em></p>
+            <audio controls src="media/NooneKnows.wav"></audio>
+          </div>
+          <div class="audio-item">
+            <p><strong>Acoustic Guitar & Vocals (F)</strong><br><em>Folk / Singer-Songwriter</em></p>
+            <audio controls src="media/rpdmegan.wav"></audio>
+          </div>
+          <div class="audio-item">
+            <p><strong>Acoustic Guitar & Vocals (M)</strong><br><em>Pop / Singer-Songwriter</em></p>
+            <audio controls src="media/rpdsamw.wav"></audio>
+          </div>
+          <div class="audio-item">
+            <p><strong>Solo Piano Recording</strong><br><em>Classical / Instrumental</em></p>
+            <audio controls src="media/SoloPiano.wav"></audio>
+          </div>
+          <div class="audio-item">
+            <p><strong>Solo Violin (Year 1)</strong><br><em>Classical / Instrumental</em></p>
+            <audio controls src="media/SoloViolin.wav"></audio>
+          </div>
+          <div class="audio-item">
+            <p><strong>Solo Violin (Year 2)</strong><br><em>Classical / Instrumental</em></p>
+            <audio controls src="media/rpdViolin.wav"></audio>
+          </div>
+          <div class="audio-item">
+            <p><strong>Solo Vocal Recording</strong><br><em>Vocal Performance</em></p>
+            <audio controls src="media/SoloVocal.wav"></audio>
+          </div>
+          <div class="audio-item">
+            <p><strong>Big Band Afro (Live)</strong><br><em>Jazz / Big Band</em></p>
+            <audio controls src="media/rpdbigBandAfro.wav"></audio>
+          </div>
+          <div class="audio-item">
+            <p><strong>Big Band Sailor (Live)</strong><br><em>Jazz / Big Band</em></p>
+            <audio controls src="media/rpdbigBandSailor.wav"></audio>
+          </div>
+          <div class="audio-item">
+            <p><strong>Big Band Jazz (Live)</strong><br><em>Jazz / Big Band</em></p>
+            <audio controls src="media/02122024_stereoMix.wav"></audio>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>College (Logic Pro X)</h3>
+        <div class="audio-list">
+          <div class="audio-item">
+            <p><strong>Lady, Hear Me Tonight (Cover)</strong><br><em>Pop</em></p>
+            <audio controls src="media/Lady.wav"></audio>
+          </div>
+          <div class="audio-item">
+            <p><strong>My House (Cover)</strong><br><em>Pop</em></p>
+            <audio controls src="media/myhouse.wav"></audio>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOUND DESIGN SECTION -->
+    <div class="section" id="sound-design">
+      <h2>Sound Design</h2>
+
+      <div class="subsection">
+        <h3>University: My Neighbor Totoro</h3>
+        <div class="video-pair">
+          <div class="video-item" style="flex: 1 1 45%;">
+            <video controls>
+              <source src="media/ghibli.mov" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-item" style="flex: 1 1 45%;">
+            <p style="text-align: center; margin-top: 0.5rem;">
+              Audio replacement, foley, ADR, sound design for a cooking scene.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>College: Star Wars – Revenge of the Sith</h3>
+        <div class="video-pair">
+          <div class="video-item" style="flex: 1 1 45%;">
+            <video controls>
+              <source src="media/starwars.mov" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-item" style="flex: 1 1 45%;">
+            <p style="text-align: center; margin-top: 0.5rem;">
+              Sound design and mixing for a Star Wars scene.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAME DESIGN SECTION -->
+    <div class="section" id="game-design">
+      <h2>Game Design</h2>
+
+      <div class="subsection">
+        <h3>Solo (Unreal + Wwise)</h3>
+        <div class="game-pair">
+          <div class="video-item" style="flex: 1 1 45%;">
+            <video controls>
+              <source src="media/walkthrough.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-item" style="flex: 1 1 45%;">
+            <p style="text-align: center; margin-top: 0.5rem;">
+              First solo project showcasing Unreal Engine and Wwise integration.<br>Only audio done by me. All visual assets taken from Unreal Store.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>University (Unity + FMOD)</h3>
+        <div class="game-pair">
+          <div class="video-item" style="flex: 1 1 45%;">
+            <video controls>
+              <source src="media/gamewalkthrough.mp4" type="video/mp4">
+            </video>
+          </div>
+          <div class="video-item" style="flex: 1 1 45%;">
+            <p style="text-align: center; margin-top: 0.5rem;">
+              Group project walkthrough featuring Unity and FMOD audio systems. This game can be played beneath.
+            </p>
+          </div>
+          <h2>Embedded Unity WebGL Game</h2>
+          <iframe
+            class="embedded-game"
+            src="media/game/index.html"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Live Sound Event Planning (Google Slides) -->
+    <div class="section" id="presentations">
+      <h2>Live Sound Event Planning</h2>
+      <p>Overview of my Live Sound Event planning workflow, created as a Google Slides presentation:</p>
+      <div class="iframe-container">
+        <iframe
+          src="https://docs.google.com/presentation/d/e/2PACX-1vTRtqeFrFes4oWEt6z_S7KwP0WOCUAZckwjlhVLeqZZLeNh_1g1WfFuzRrWfBBaeA/pubembed?start=false&loop=false&delayms=60000"
+          width="100%"
+          height="600"
+          frameborder="0"
+          allowfullscreen
+          mozallowfullscreen
+          webkitallowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Arduino‐Based Synthesizer (Google Slides) -->
+    <div class="section">
+      <h2>Arduino-Based Synthesizer</h2>
+      <p>Details of the Arduino-powered synthesizer project (MATLAB/C++ prototype overview):</p>
+      <div class="iframe-container">
+        <iframe
+          src="https://docs.google.com/presentation/d/e/2PACX-1vQlzzALJbL6-WrUF9tgrIi-DgdxmWCJq4UHQGyvQYwyyWE8GZ8qljOIiHBCvbTVIg/pubembed?start=false&loop=false&delayms=60000"
+          width="100%"
+          height="600"
+          frameborder="0"
+          allowfullscreen
+          mozallowfullscreen
+          webkitallowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Posters Section (Side by Side with Hover Effect) -->
+    <div class="section" id="posters">
+      <h2>Research &amp; Project Posters</h2>
+      <div class="poster-pair"
+          style="display: flex; justify-content: center; flex-wrap: wrap; gap: 2rem; margin-top: 1.5rem;">
+
+        <!-- MIR Poster -->
+        <div class="poster-item" style="flex: 1 1 300px; text-align: center;">
+          <h3 style="color: #eee; margin-bottom: 0.5rem;">MIR Project Poster</h3>
+          <img
+            src="media/DIG6109_MIR_Poster_MWilde-1.png"
+            alt="MIR Project Poster"
+            style="max-width: 100%; height: auto;"
+          />
+          <p style="font-size: 0.9rem; color: #ccc; margin-top: 0.5rem;">
+            “Speaker Identification Using Machine Learning Techniques”
+          </p>
+        </div>
+
+        <!-- Final Year Project Poster -->
+        <div class="poster-item" style="flex: 1 1 300px; text-align: center;">
+          <h3 style="color: #eee; margin-bottom: 0.5rem;">Final Year Project Poster</h3>
+          <img
+            src="media/Matthew Wilde 22135299 Poster-1.png"
+            alt="Final Year Project Poster"
+            style="max-width: 100%; height: auto;"
+          />
+          <p style="font-size: 0.9rem; color: #ccc; margin-top: 0.5rem;">
+            “An Investigation of a Wavelet‐Based Approach for Automated Restoration of Vintage Audio”
+          </p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- DISSERTATION DOWNLOAD -->
+    <div class="section" id="dissertation" style="text-align: center;">
+      <h2>Dissertation</h2>
+      <p>You can download my full Individual Honours dissertation below:</p>
+      <a
+        class="download-link"
+        href="media/MatthewWilde_Dissertation.pdf"
+        download
+        target="_blank"
+        rel="noopener"
+        style="display: inline-block; margin-top: 1rem;"
+      >
+        Download Dissertation (PDF)
+      </a>
+    </div>
+  </div>
+
+  <a href="#top" class="back-to-top">↑ Back to Top</a>
+</body>
+</html>

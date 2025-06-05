@@ -1,0 +1,179 @@
+<!-- PreCollege.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pre-College</title>
+  <style>
+    /* Import web font */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    :root {
+      --overlay-opacity: 0.8;
+      --accent-color: #4FC3F7;
+      --card-bg: rgba(0,0,0,0.5);
+      --border-radius: 8px;
+      --transition-speed: 0.3s;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      position: relative;
+      background: url('media/background.jpg') center/cover no-repeat fixed;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.6;
+    }
+    body::before {
+      content: "";
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,var(--overlay-opacity));
+      z-index: 0;
+    }
+    nav {
+      position: relative; z-index: 1;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 1rem 1.5rem;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+    }
+    nav ul li + li { margin-left: 1rem; }
+    nav a {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.1);
+      border-radius: var(--border-radius);
+    }
+    .content {
+      flex: 1; position: relative; z-index: 1;
+      padding: 3rem;
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      justify-content: center;
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+    .section {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      flex: 1 1 2600px; /* doubled basis */
+      max-width: 2600;    /* doubled max width */
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .section h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--accent-color);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+    }
+    .section p {
+      font-size: 1rem;
+    }
+    .section img {
+      display: block;
+      width: 90%;
+      height: auto;
+      margin: 0.5rem auto 0;
+      border-radius: var(--border-radius);
+      border: 2px solid rgba(255,255,255,0.5);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    }
+    .section img:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.6);
+    }
+    .gcse-list {
+      list-style: disc inside;
+      margin-left: 1rem;
+      margin-top: 0.5rem;
+      color: #eee;
+    }
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.3);
+      margin: 3rem 0;
+      width: 80%;
+      align-self: center;
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 1rem; right: 1rem;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      padding: 0.5rem;
+      border-radius: var(--border-radius);
+      text-decoration: none;
+      font-size: 0.9rem;
+      z-index: 1;
+      transition: background var(--transition-speed);
+    }
+    .back-to-top:hover {
+      background: rgba(255,255,255,0.4);
+    }
+    @media (max-width: 2600) {
+      .content { flex-direction: column; gap: 2rem; }
+    }
+  </style>
+</head>
+<body id="top">
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="quickstop.html">Quickstop</a></li>
+      <li><a href="University.html">University</a></li>
+      <li><a href="College.html">College</a></li>
+      <li><a href="PreCollege.html">Pre-College</a></li>
+      <li><a href="Personal.html">Personal</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+  <div class="content">
+    <div class="section">
+      <h2>Pre-College</h2>
+      <p>In secondary school I chose to do a Computer Science GCSE, as well as a Music Technology BTEC. The music technology course in my school was barely even able to run as it only had 7 people wanting to take it, and I can't imagine where I would be right now if it hadn't been able to run.</p>
+      <p>Looking back, I don't think either of these classes were as informative as they could have been, however they still taught valuable skills such as basic Python skills and programming principles in computer science; the principles of audio FX and using a DAW (Cubase 8 Elements).</p>
+      <p>My GCSEs would eventually be cancelled due to the Covid-19 pandemic, but I achieved a grade 7 in Computer Science and a merit in Music Technology.</p>
+      <img src="media/highschoolmusic.jpg" alt="Pre-College Classroom">
+      <h3>GCSE Results</h3>
+      <ul class="gcse-list">
+        <li>Maths – 9</li>
+        <li>Combined Science – 8-8</li>
+        <li>Computer Science – 7</li>
+        <li>English Language – 7</li>
+        <li>History – 7</li>
+        <li>Religious Studies – 7</li>
+        <li>French – 7</li>
+        <li>English Literature – 6</li>
+        <li>Level 2 Music Technology – Merit</li>
+      </ul>
+    </div>
+    <hr class="divider">
+    <div class="section">
+      <h2>Childhood YouTube</h2>
+      <p>When I was younger, like most kids now-a-days I was absolutely obsessed with YouTubers and gaming, so when youre a teenager with an Xbox and a laptop, what else to do except making YouTube videos?</p>
+      <p>Originally I was making YouTube montages of me playing Call of Duty with my friends getting cool clips and putting music behind them, but eventually I started trying to create actual good montages with synced up audio with the beats on games like Fortnite, Rainbow Six Siege and lots of Call of Duties.</p>
+      <p>Looking back on these videos now, I wouldn't say that any of them are good or recommend anyone watch them, but they were instrumental in me getting into audio and sound and I am still proud of the work I put into them when I was around 13/14.</p>
+      <img src="media/youtube.jpg" alt="Old YouTube Channel Screenshot">
+    </div>
+  </div>
+  <a href="#top" class="back-to-top">↑ Back to Top</a>
+</body>
+</html>

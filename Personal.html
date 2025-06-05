@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Projects</title>
+  <style>
+    /* Import web font */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    :root {
+      --overlay-opacity: 0.8;
+      --accent-color: #4FC3F7;
+      --card-bg: rgba(0,0,0,0.5);
+      --border-radius: 8px;
+      --transition-speed: 0.3s;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      position: relative;
+      background: url('media/background.jpg') center/cover no-repeat fixed;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+    body::before {
+      content: "";
+      position: fixed; top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,var(--overlay-opacity));
+      z-index: 0;
+    }
+    nav {
+      position: relative; z-index: 1;
+      background: rgba(0,0,0,0.7);
+      padding: 1rem 1.5rem;
+    }
+    nav ul { list-style: none; display: flex; justify-content: center; }
+    nav ul li + li { margin-left: 1rem; }
+    nav a {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.1);
+      border-radius: var(--border-radius);
+    }
+    .content {
+      flex: 1; position: relative; z-index: 1;
+      padding: 3rem;
+      max-width: 1320px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .section {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .section h1 {
+      font-size: 2.5rem;
+      color: var(--accent-color);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+      text-align: center;
+    }
+    /* Dropdown projects */
+    details.project {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: var(--border-radius);
+      padding: 1rem;
+      transition: background var(--transition-speed);
+    }
+    details.project[open] { background: rgba(0,0,0,0.6); }
+    details.project summary {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--accent-color);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+      list-style: none;
+      cursor: pointer;
+      outline: none;
+      position: relative;
+      padding-right: 1.5em;
+    }
+    /* Remove default marker */
+    details.project summary::-webkit-details-marker { display: none; }
+    /* Custom arrow */
+    details.project summary::after {
+      content: '▼';
+      position: absolute; right: 0;
+      font-size: 1rem;
+      transition: transform var(--transition-speed);
+    }
+    details.project[open] summary::after {
+      content: '▲';
+      transform: translateY(-0.2em);
+    }
+    details.project .project-content {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .project-showcase {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+    .project-showcase video {
+      flex: 1 1 400px;
+      max-width: 600px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+    .showcase-info {
+      flex: 1 1 300px;
+    }
+    .showcase-list {
+      list-style: disc inside;
+      color: #eee;
+      margin-top: 1rem;
+    }
+    .section img {
+      width: 80%; height: auto;
+      border-radius: var(--border-radius);
+      border: 2px solid rgba(255,255,255,0.5);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+      align-self: center;
+    }
+    .section img:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.6);
+    }
+    .caption {
+      font-size: 0.9rem;
+      color: #ccc;
+      text-align: center;
+    }
+    .back-to-top {
+      position: fixed; bottom: 1rem; right: 1rem;
+      background: rgba(255,255,255,0.2);
+      color: #fff; padding: 0.5rem;
+      border-radius: var(--border-radius);
+      text-decoration: none; font-size: 0.9rem;
+      z-index: 1;
+      transition: background var(--transition-speed);
+    }
+    .back-to-top:hover { background: rgba(255,255,255,0.4); }
+    @media (max-width: 800px) {
+      .project-showcase { flex-direction: column; }
+    }
+    /* Skills section styling */
+    .skills-section {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: rgba(255,255,255,0.1);
+      border-radius: var(--border-radius);
+    }
+    .skills-column {
+      flex: 1;
+    }
+    .skills-column h3 {
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
+    }
+    .skills-list {
+      list-style-type: none;
+    }
+    .skills-list li {
+      margin-bottom: 0.3rem;
+      position: relative;
+      padding-left: 1.2rem;
+    }
+    .skills-list li:before {
+      content: "•";
+      color: var(--accent-color);
+      position: absolute;
+      left: 0;
+    }
+  </style>
+</head>
+<body id="top">
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="quickstop.html">Quickstop</a></li>
+      <li><a href="University.html">University</a></li>
+      <li><a href="College.html">College</a></li>
+      <li><a href="PreCollege.html">Pre-College</a></li>
+      <li><a href="Personal.html">Personal</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+  <div class="content">
+    <div class="section">
+      <h1>Personal Projects</h1>
+      <p>This page showcases personal projects that I have undertaken, or are currently undertaking. This page will be updated when significant changes are made to a project.</p>
+      <!-- Portfolio Website Section -->
+      <details class="project">
+        <summary>Portfolio Website</summary>
+        <div class="project-content">
+          <div class="skills-section">
+            <div class="skills-column">
+              <h3>Technical Skills</h3>
+              <ul class="skills-list">
+                <li>HTML5 & CSS3</li>
+                <li>Responsive Design</li>
+                <li>JavaScript</li>
+                <li>Git Version Control</li>
+                <li>UI/UX Design</li>
+              </ul>
+            </div>
+            <div class="skills-column">
+              <h3>Soft Skills</h3>
+              <ul class="skills-list">
+                <li>Project Planning</li>
+                <li>Content Organization</li>
+                <li>Self-directed Learning</li>
+                <li>Attention to Detail</li>
+                <li>Problem Solving</li>
+              </ul>
+            </div>
+          </div>
+          
+          <p>This portfolio website was designed and developed from scratch to showcase my academic and professional work. Key features include:</p>
+          
+          <div class="project-showcase">
+            <div class="showcase-info">
+              <ul class="showcase-list">
+                <li>Responsive design that works on all devices</li>
+                <li>Interactive filtering system for projects</li>
+                <li>Embedded audio/video content</li>
+                <li>Clean, accessible interface</li>
+                <li>Optimized performance</li>
+              </ul>
+            </div>
+          </div>
+          
+          <p>The site was built with pure HTML, CSS, and JavaScript without relying on frameworks to demonstrate fundamental web development skills. It's hosted on a server with continuous updates as I complete new projects.</p>
+        </div>
+      </details>
+      
+      <!-- Solo Unity Game Section -->
+      <details class="project">
+        <summary>Solo Unity Game Project</summary>
+        <div class="project-content">
+          <div class="skills-section">
+            <div class="skills-column">
+              <h3>Technical Skills</h3>
+              <ul class="skills-list">
+                <li>Unity Development</li>
+                <li>C# Programming</li>
+                <li>Game Mechanics</li>
+                <li>Level Design</li>
+                <li>Audio Implementation</li>
+              </ul>
+            </div>
+            <div class="skills-column">
+              <h3>Soft Skills</h3>
+              <ul class="skills-list">
+                <li>Project Management</li>
+                <li>Creative Problem Solving</li>
+                <li>Independent Learning</li>
+                <li>Time Management</li>
+                <li>Debugging</li>
+              </ul>
+            </div>
+          </div>
+          
+          <p>This is a solo-developed Unity game that showcases my skills in game design and programming. The project includes:</p>
+          
+          <div class="project-showcase">
+            <video src="media/unity-gameplay.mp4" controls></video>
+            <div class="showcase-info">
+              <ul class="showcase-list">
+                <li>Custom character controller</li>
+                <li>Interactive environment</li>
+                <li>Puzzle mechanics</li>
+                <li>Dynamic audio system</li>
+                <li>UI/UX implementation</li>
+              </ul>
+            </div>
+          </div>
+          
+          <p>The game was developed over several months, with all programming, design, and audio work done independently. It demonstrates my ability to see a complex project through from concept to completion.</p>
+          
+          <img src="media/unity-editor.jpg" alt="Unity editor screenshot">
+          <p class="caption">Screenshot of the Unity editor showing the game's level design</p>
+        </div>
+      </details>
+
+      <!-- Wwise & Unreal Section -->
+      <details class="project">
+        <summary>Wwise & Unreal</summary>
+        <div class="project-content">
+          <div class="skills-section">
+            <div class="skills-column">
+              <h3>Technical Skills</h3>
+              <ul class="skills-list">
+                <li>Wwise Integration</li>
+                <li>Unreal Engine</li>
+                <li>Sound Design</li>
+                <li>Audio Implementation</li>
+                <li>Interactive Music</li>
+              </ul>
+            </div>
+            <div class="skills-column">
+              <h3>Soft Skills</h3>
+              <ul class="skills-list">
+                <li>Technical Learning</li>
+                <li>Creative Adaptation</li>
+                <li>Problem Solving</li>
+                <li>Attention to Detail</li>
+                <li>Self-Motivation</li>
+              </ul>
+            </div>
+          </div>
+          
+          <p>I am learning Wwise and its integration into Unreal Engine. The first project was made showing off areas that I have learnt so far.</p>
+          <div class="project-showcase">
+            <video src="media/walkthrough.mp4" controls></video>
+            <div class="showcase-info">
+              <h3>Demonstrated in this clip:</h3>
+              <ul class="showcase-list">  
+                <li>Footsteps (First Person)</li>
+                <li>Footstep material switching</li>
+                <li>Background music</li>
+                <li>Object collision sounds (Reverb, Random containers)</li>
+                <li>Ambient sounds (Occlusion &amp; Obstruction)</li>
+                <li>Switches used for footstep material changes</li>
+                <li>States used for background music changes</li>
+              </ul>
+            </div>
+          </div>
+
+          <img src="media/wwise.jpg" alt="Wwise project screen overview">
+          <p class="caption">An overview of the Wwise project screen seen here.</p>
+          <p>The sounds used either come from freesounds.org, or are ones I created myself during a university foley project.<br>
+          The music used is "Colony 9 (Night)" and "Forest of the Nopon (Extended)" both from the game Xenoblade Chronicles DE.<br>
+          The map used was downloaded from the Epic marketplace.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+  <a href="#top" class="back-to-top">↑ Back to Top</a>
+</body>
+</html>

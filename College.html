@@ -1,0 +1,262 @@
+<!-- college.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College</title>
+  <style>
+    /* Web font + vars */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    :root{
+      --overlay-opacity:0.8;
+      --accent-color:#4FC3F7;
+      --card-bg:rgba(0,0,0,0.5);
+      --border-radius:8px;
+      --transition-speed:0.3s;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html,body{height:100%;font-family:'Inter',sans-serif;}
+    body{display:flex;flex-direction:column;color:#fff;
+      background:url('media/background.jpg') center/cover no-repeat fixed;
+      position:relative;line-height:1.6;
+    }
+    body::before{content:"";position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,var(--overlay-opacity));z-index:0;}
+    nav{position:relative;z-index:1;background:rgba(0,0,0,0.7);padding:1rem 1.5rem;}
+    nav ul{list-style:none;display:flex;justify-content:center;}
+    nav ul li+li{margin-left:1rem;}
+    nav a{display:block;padding:0.5rem 1rem;color:#fff;text-decoration:none;font-weight:600;}
+    nav a:hover{background:rgba(255,255,255,0.1);border-radius:var(--border-radius);}
+     .content{flex:1;position:relative;z-index:1;padding:3rem;max-width:1320px;margin:0 auto;}
+    /* Center media in project and module content */
+    .project-content video,
+    .project-content audio,
+    .project-content img,
+    .module-content video,
+    .module-content audio,
+    .module-content img {
+      display: block;
+      margin: 1rem auto;
+    }
+    .intro{background:var(--card-bg);padding:2rem;border-radius:var(--border-radius);margin-bottom:2rem;}
+    .intro h1{font-size:2.5rem;color:var(--accent-color);text-align:center;margin-bottom:1rem;
+      text-shadow:0 1px 4px rgba(0,0,0,0.7);}
+    .intro p{margin-bottom:1rem;}
+    .grades{display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;}
+    .grades .col{flex:1 1 200px;max-width:300px;text-align:left;}
+    .grades .col h3{font-size:1.25rem;color:var(--accent-color);margin-bottom:0.5rem;}
+    .grades .col ul{list-style:disc inside;color:#eee;}
+    /* Main dropdowns */
+    details.project{width:1200px;margin:1rem auto;background:var(--card-bg);
+      border:1px solid rgba(255,255,255,0.3);border-radius:var(--border-radius);
+      padding:1rem;transition:background var(--transition-speed);
+    }
+    details.project[open]{background:rgba(0,0,0,0.6);}    
+    details.project summary{font-size:1.75rem;font-weight:700;color:var(--accent-color);
+      text-shadow:0 1px 4px rgba(0,0,0,0.7);cursor:pointer;list-style:none;
+      outline:none;text-align:center;
+    }
+    details.project summary::-webkit-details-marker{display:none;}
+    details.project summary::after{content:'▼';float:right;transition:transform var(--transition-speed);}    
+    details.project[open] summary::after{content:'▲';}
+    details.project .project-content{margin-top:1rem;padding:0 1rem;}
+    
+    /* Nested sub-dropdowns */
+    details.module{background:rgba(255,255,255,0.1);border-radius:4px;margin:0.5rem 0;padding:0.5rem;}
+    details.module summary{font-size:1.2rem;color:#fff;cursor:pointer;list-style:none;}
+    details.module summary::-webkit-details-marker{display:none;}
+    details.module summary::before{content:'▶ ';display:inline-block;transition:transform var(--transition-speed);}    
+    details.module[open] summary::before{transform:rotate(90deg);}    
+    details.module .module-content{margin-top:0.5rem;padding-left:1em;}
+    @media(max-width:800px){details.project{width:100%;}}
+    .back-to-top{position:fixed;bottom:1rem;right:1rem;background:rgba(255,255,255,0.2);
+      color:#fff;padding:0.5rem;border-radius:var(--border-radius);
+      text-decoration:none;font-size:0.9rem;z-index:1;transition:background var(--transition-speed);
+    }
+    .back-to-top:hover{background:rgba(255,255,255,0.4);}    
+    /* NEA image styling */
+    .nea-images img {
+      width: 90%;
+      border-radius: var(--border-radius);
+      border: 2px solid rgba(255,255,255,0.5);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+      align-self: center;
+    }
+    .nea-images img:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.6);
+    }
+        /* Course units styling */
+    .course-units {
+      list-style: disc inside;
+      margin-left: 2rem;
+      font-style: italic;
+      color: #eee;
+    }
+    /* Music Tech media hover effect */
+    .project-content img,
+    .module-content img {
+      border-radius: var(--border-radius);
+      border: 2px solid rgba(255,255,255,0.5);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    }
+    .project-content img:hover,
+    .module-content img:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.6);
+    }
+
+  </style>
+</head>
+<body id="top">
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="quickstop.html">Quickstop</a></li>
+      <li><a href="University.html">University</a></li>
+      <li><a href="college.html">College</a></li>
+      <li><a href="PreCollege.html">Pre-College</a></li>
+      <li><a href="Personal.html">Personal</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+  <div class="content">
+    <div class="intro">
+      <h1>College</h1>
+      <p>When I got to college the A-Levels I decided to do were an A-Level in Computer Science and a Level 3 Music Technology Diploma. As well as this I also took part in an extra curricular, the Music Practitioners Certificate Level 3. Grades Achieved:</p>
+      <div class="grades">
+        <div class="col">
+          <h3>A-Levels:</h3>
+          <ul><li>Computer Science &ndash; A</li></ul>
+        </div>
+        <div class="col">
+          <h3>BTEC Level 3 National Diploma:</h3>
+          <ul><li>Music Technology &ndash; <em>Distinction* Distinction</em></li></ul>
+        </div>
+        <div class="col">
+          <h3>Music Practitioners Certificate Level 3:</h3>
+          <ul><li>Music Technology &ndash; <em>Distinction*</em></li></ul>
+        </div>
+      </div>
+    </div>
+    <details class="project">
+      <summary>Computer Science</summary>
+      <div class="project-content">
+        <p>The only project done in Computer Science, the Non-Exam-Assessment required the creation of a simple system using Visual Studio.<br>
+        For my project, I ended up creating a stock and checkout system, which included a stock page detailing all items in stock in a fictional shop, with different access levels on the system. The access levels meant a login password system for customers, employees and admins, each with separate levels of what they could do—employees could edit stock levels and process transactions, while admins could also alter or add user information.</p>
+        <p>The project was done in Visual Studio using the VB.NET language. Looking back, the most useful parts of the project that I took forward with me were the importance of code optimization, normalizing databases using MS Access, and how to make use of external code libraries and documentation, which I used to create an email "forgot password" system. Code optimization was a big challenge, especially when creating several databases of users and stock without foresight. Learning MS Access and SQL with 3rd Normal Form requirements was extremely useful.</p>
+        <div class="nea-images" style="display:flex; gap:1rem; flex-wrap:wrap;">
+          <div style="display:flex; flex-direction:column; gap:1rem;">
+            <img src="media/neaDatabase.png" alt="NEA Database schema">
+            <img src="media/neaFiles.png" alt="NEA File handling">
+          </div>
+          <div style="flex:1;">
+            <img src="media/neaCode.png" alt="NEA Code sample">
+          </div>
+        </div>
+      </div>
+    </details>
+    <details class="project">
+      <summary>Music Technology</summary>
+      <div class="project-content">
+        <p>The main software used on this course was Logic Pro X.</p>
+        <p>There were lots of units done in this, not all of which will be gone into detail here, however some that I think are important will be.</p>
+        <p>All units done were:</p>
+        <ul class="course-units">
+          <li>A recording module having to record 2 covers</li>
+          <li>A business module along with the recording for budgeting and roles in the industry</li>
+          <li>Mixing and mastering module on the 2 recorded covers</li>
+          <li>Film sound &amp; foley module</li>
+          <li>A long form dissertation-esque module &ndash; researched war's influence on music</li>
+          <li>A live sound module producing and live mixing a small performance</li>
+          <li>A deep dive into synthesizers &amp; samplers and how they work</li>
+          <li>An exam broken into 3 hours of research on a specific song and 3 hours writing about its history and production</li>
+        </ul>
+        <details class="module">
+          <summary>Film Audio &amp; Foley</summary>
+          <div class="module-content">
+            <p>This unit entailed selecting a scene from a film that lasted for around a minute and a half and replacing all Foley and sound effects used for that clip, as well as creating a soundtrack.</p>
+            <p>I think that this unit was very useful moving into university as many of the skills gained are transferable to other areas, like serious time management and organisation due to the amount of time Foley and the editing would take. Other important things were the importance of microphone selection for the correct scenario, whether that be a large diaphragm to capture a booming sound or a pointed hypercardioid mic to capture a quiet metal flick.</p>
+            <video src="media/starwars.mov" controls style="width:80%;border-radius:var(--border-radius);box-shadow:0 4px 12px rgba(0,0,0,0.5);"></video>
+          </div>
+        </details>
+        <details class="module">
+          <summary>Recording &amp; Post Production</summary>
+          <div class="module-content">
+            <p>This section includes 2 units combined into one, the recording and the mixing &amp; mastering using Logic Pro X.</p>
+            <p>The recording included a group of 4 of us selecting two songs to create a cover of. I personally chose the song "Lady, Hear me Tonight - Modjo" and another member of the group chose "My House - Flo Rida".</p>
+            <p>We first created a bed track of each section using MIDI, to then go back and record the proper recording over the bed track using the appropriate techniques and equipment.</p>
+            <p>Once recorded, the two tracks had to be mixed and mastered. This helped me to work on my critical listening skills and to be able to properly decipher what is needed to be done, whether that be gates, specific EQ, compression etc.</p>
+            <audio controls src="media/Lady.wav"></audio>
+            <audio controls src="media/myhouse.wav"></audio>
+            <img src="media/drumkit.png" alt="Drumkit" style="width:60%;border-radius:var(--border-radius);box-shadow:0 4px 12px rgba(0,0,0,0.5);">
+            <p>The two major things that I would change if I went back and did this now would be using a different singer as the voice doesn't fit the songs, and reducing the loudness of the bass and changing how it is EQ'd as it sounds muddy and unclear.</p>
+          </div>
+        </details>
+        <details class="module">
+          <summary>Synthesizers &amp; Samplers</summary>
+          <div class="module-content">
+            <p>This unit consisted of learning all about the history of synths and samplers, as well all about how they work. With synths I learnt about subtractive, additive and FM, as well as how to actually use the ones built into Logic Pro X. We were tasked with creating our own synths and using a sampler to create a piece of music. Unfortunately I've lost the piece of music itself, but I still have screenshots explaining the process.</p>
+            <img src="media/synth.png" alt="Logic Synth Screenshot" style="width:80%;border-radius:var(--border-radius);box-shadow:0 4px 12px rgba(0,0,0,0.5);">
+          </div>
+        </details>
+        <details class="module">
+          <summary>Live Sound</summary>
+          <div class="module-content">
+            <p>In this unit I learnt all about the basics of live sound and mixing desks. We started by learning things like health and safety and the correct way to carry things and set up equipment. We learnt the fundamentals of the signal chain and how to locate errors within the setup.</p>
+            <p>Our assessment involved working together in a 4 man team to set up a stage with equipment on it for a single performer using vocals and a guitar. We then had 10 minutes to apply all needed FX using the mixing desk and record a take of a song through it into a DAW.</p>
+            <p>This module gave me many valuable skills that I took through to university, with the signal chain, health and safety and how to effectively work as a team under pressure.</p>
+          </div>
+        </details>
+      </div>
+    </details>
+  </div>
+  <a href="#top" class="back-to-top">↑ Back to Top</a>
+  <!-- Lightbox overlay -->
+  <div id="lightbox" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.8);justify-content:center;align-items:center;z-index:9999;flex-direction:column;">
+    <button id="lb-close" style="position:absolute;top:1rem;right:1rem;font-size:2rem;color:#fff;background:none;border:none;cursor:pointer;">&times;</button>
+    <div style="display:flex;align-items:center;">
+      <button id="lb-zoom-out" style="font-size:2rem;color:#fff;background:none;border:none;cursor:pointer;margin-right:1rem;">–</button>
+      <img id="lb-img" src="" style="max-width:80vw;max-height:80vh;transform:scale(1);transition:transform .2s;">
+      <button id="lb-zoom-in" style="font-size:2rem;color:#fff;background:none;border:none;cursor:pointer;margin-left:1rem;">+</button>
+    </div>
+  </div>
+
+  <script>
+    // Lightbox functionality
+    let scale = 1;
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const images = document.querySelectorAll('.nea-images img');
+    images.forEach(img => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => {
+        lbImg.src = img.src;
+        scale = 1;
+        lbImg.style.transform = `scale(${scale})`;
+        lb.style.display = 'flex';
+      });
+    });
+    document.getElementById('lb-close').addEventListener('click', () => {
+      lb.style.display = 'none';
+    });
+    document.getElementById('lb-zoom-in').addEventListener('click', () => {
+      scale = Math.min(scale + 0.2, 4);
+      lbImg.style.transform = `scale(${scale})`;
+    });
+    document.getElementById('lb-zoom-out').addEventListener('click', () => {
+      scale = Math.max(scale - 0.2, 1);
+      lbImg.style.transform = `scale(${scale})`;
+    });
+    lb.addEventListener('wheel', e => {
+      e.preventDefault();
+      scale = Math.min(Math.max(scale - e.deltaY * 0.001, 1), 4);
+      lbImg.style.transform = `scale(${scale})`;
+    });
+  </script>
+</body>
+</html>
