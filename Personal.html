@@ -308,6 +308,115 @@
         </div>
       </details>
 
+      <!-- Resonance Runner Project Section -->
+      <details class="project" open>
+        <summary>Resonance Runner - Cyberpunk Roguelike Deck-Builder</summary>
+        <div class="project-content">
+          
+          <div class="skills-section">
+            <div class="skills-column">
+              <h3>Technical Skills</h3>
+              <ul class="skills-list">
+                <li>Unity Development</li>
+                <li>C# Programming</li>
+                <li>Systems Architecture</li>
+                <li>UI/UX Programming (UGUI)</li>
+                <li>Data-Driven Design (ScriptableObjects)</li>
+                <li>Dynamic Audio Integration (Wwise)</li>
+              </ul>
+            </div>
+            <div class="skills-column">
+              <h3>Soft Skills</h3>
+              <ul class="skills-list">
+                <li>Project Management & Roadmapping</li>
+                <li>Iterative Design & Debugging</li>
+                <li>Systems Thinking</li>
+                <li>Creative Problem Solving</li>
+                <li>Solo Development Discipline</li>
+              </ul>
+            </div>
+          </div>
+          
+          <p><strong>Resonance Runner</strong> is a solo-developed prototype for a roguelike deck-builder built in Unity. The concept blends cyberpunk themes with “audio-hacking” mechanics, where the player battles hostile security programs using a deck of sound-based attacks. The core gameplay takes inspiration from <em>Slay the Spire</em>, featuring a unique “Compiler” system that lets players combine <em>Core Signal</em> (attack) cards with <em>Codec</em> (effect) cards to create synergistic abilities.</p>
+          
+          <div class="project-showcase">
+            <video src="media/resonance-runner-gameplay.mp4" controls muted autoplay loop playsinline>
+              Your browser does not support the video tag.
+            </video>
+            <div class="showcase-info">
+              <ul class="showcase-list">
+                <li>Persistent roguelike progression with a node-based map.</li>
+                <li>Full-featured deck builder and card collection menu.</li>
+                <li>Tactical turn-based combat with multi-enemy encounters.</li>
+                <li>Unique “Compiler” system for combining cards.</li>
+                <li>Data-driven enemy AI with telegraphed intents.</li>
+                <li>Advanced card effects (Splash, Volatile, Statuses).</li>
+                <li>Dynamic, reactive audio design via Wwise.</li>
+              </ul>
+            </div>
+          </div>
+          
+          <h3>Game Architecture in Unity</h3>
+          <p>The prototype is built around a modular, data-driven structure. ScriptableObjects store core data like encounter information, run progress, and balance parameters, keeping logic clean and easy to maintain. Prefabs handle interactive objects such as cards, enemies, and visual elements, allowing new content to be created or tweaked directly in the Unity Inspector without extra coding. Separating data from behaviour made iteration fast and the system easy to expand.</p>
+
+          <p>Managers like <code>GameManager</code>, <code>RunManager</code>, and <code>AudioManager</code> handle persistent data and player state across scenes, while <code>BattleManager</code> manages turn flow and combat logic. This modular setup simplified debugging and made it easy to add features like multi-enemy battles and branching map progression without breaking existing systems.</p>
+
+          <h3>Audio Integration with Wwise</h3>
+          <p>Because the game’s theme revolves around “audio hacking,” the sound system is central to its identity. Wwise manages all attack sounds through a single Switch container, where the selected attack determines which event plays. Each sound is then routed through a dedicated Effect Bus that contains all available effects. Each effect is linked to its own Game Parameter (RTPC), which controls whether it’s bypassed or active. When an attack triggers, the game activates the relevant RTPC so only the required effect runs, while all others remain bypassed.</p>
+
+          <p>Instead of using a fixed delay to disable effects—which would waste in-game time—the system uses a small queue feature. Each time an attack sound plays, the game stores the active RTPC name in memory. When the next effect triggers, it resets the previous one before activating the new parameter. This keeps the system efficient and ensures the correct effect is always active, even when sounds vary in length.</p>
+
+          <p>This dynamic audio setup helps make each attack feel responsive and distinct, reinforcing the “audio-hacking” concept at the heart of the game.</p>
+        </div>
+
+         <br>  <br> 
+
+          <!-- Use a placeholder for a screenshot of your Wwise project or Unity Editor -->
+          <img src="media/resonance-runner-wwise.png" alt="Screenshot of the Wwise project for Resonance Runner">
+          <p class="caption">A screenshot of the Wwise project, showing the dynamic signal flow for the audio compiler system.</p>
+        
+        <br>  <br> 
+
+        <h3>Ongoing Skill Development</h3>
+        <p><strong>Resonance Runner</strong> has been a major hands-on project for refining both my technical and creative skills. Through continued development and testing, I’ve been expanding my knowledge across multiple areas of game audio and implementation.</p>
+
+        <div class="skills-section">
+          <div class="skills-column">
+            <h4>Technical Focus</h4>
+            <ul class="skills-list">
+              <li><strong>Unity Development:</strong> Building modular systems and debugging complex interactions between managers and game states.</li>
+              <li><strong>C# Programming:</strong> Writing efficient, maintainable gameplay and audio code, with an emphasis on modularity and readability.</li>
+              <li><strong>Wwise Integration:</strong> Deepening understanding of real-time parameters, effect routing, and middleware performance.</li>
+              <li><strong>Wwise Profiler:</strong> Using live profiling to monitor RTPCs, event calls, and system performance during gameplay.</li>
+              <li><strong>Debugging & Optimisation:</strong> Iterating on system design based on profiler data to reduce unnecessary calls and improve responsiveness.</li>
+            </ul>
+          </div>
+
+          <div class="skills-column">
+            <h4>Creative & Design Skills</h4>
+            <ul class="skills-list">
+              <li><strong>Sound Design:</strong> Creating and balancing layers of attack and UI feedback for clarity and impact.</li>
+              <li><strong>Mixing & Implementation:</strong> Adjusting loudness, timing, and spatialisation to support gameplay readability.</li>
+              <li><strong>UI & Graphic Design:</strong> Designing the interface and visual assets to fit the game’s cyberpunk theme.</li>
+              <li><strong>Presentation:</strong> Recording and editing gameplay footage to document technical and creative processes.</li>
+            </ul>
+          </div>
+        </div>
+
+        <p>Together, these areas have helped strengthen my understanding of how creative intent and technical systems work hand in hand to shape player experience.</p>
+
+        <div class="project-showcase">
+          <video src="media/resonance-runner-wwise-profiler.mp4" controls muted autoplay loop playsinline>
+            Your browser does not support the video tag.
+          </video>
+          <div class="showcase-info">
+            <p><strong>Demonstration:</strong> Real-time gameplay with the Wwise Profiler running, showing event triggers, RTPC changes, and effect routing as attacks are compiled and executed in-game.</p>
+          </div>
+        </div>
+
+      </div>
+      </details>
+
       <!-- Wwise & Unreal Section -->
       <details class="project">
         <summary>Wwise & Unreal</summary>
