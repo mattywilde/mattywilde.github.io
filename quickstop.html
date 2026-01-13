@@ -208,6 +208,44 @@
     .contents-list li a:hover {
       color: #fff;
       text-decoration: underline;
+    } /* github and code styles*/
+    .code-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: #333;
+      color: #fff;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: var(--border-radius);
+      text-decoration: none;
+      transition: background var(--transition-speed), transform var(--transition-speed);
+    }
+    .code-link:hover {
+      background: #444;
+      transform: translateY(-2px);
+      border-color: var(--accent-color);
+    }
+    /* Code/System Description Box */
+    .tech-breakdown {
+      background: rgba(0,0,0,0.3);
+      border-left: 4px solid var(--accent-color);
+      padding: 1rem;
+      margin: 1rem 0;
+      text-align: left;
+    }
+    .tech-breakdown h4 {
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+    }
+    .tech-breakdown code {
+      background: rgba(255,255,255,0.1);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: monospace;
+      color: #ff9;
     }
   </style>
 </head>
@@ -239,6 +277,77 @@
       </ul>
     </div>
 
+    <div class="section" id="programming">
+      <h2>Audio Programming & Systems</h2>
+      <div style="text-align: center;">
+      <a href="https://github.com/mattywilde" target="_blank" class="code-link">
+        View Source Code on GitHub
+      </a>
+    </div>
+
+      <div class="subsection">
+        <h3>C# & Wwise Architecture: Resonance Runner</h3>
+        <div class="game-pair">
+          <div class="video-item" style="flex: 1  1 45%;">
+            <video controls src="media/resonance-runner-wwise-profiler.mp4"></video>
+          </div>
+          <div class="video-item" style="flex: 1 1 45%; align-items: flex-start;">
+            <p>
+              Architected a modular audio system for a roguelike deck-builder. 
+              Focus on decoupling gameplay logic from audio implementation using a custom wrapper.
+            </p>
+            
+            <div class="tech-breakdown">
+              <h4>Key Implementation Details:</h4>
+              <ul>
+                <li><strong>Dynamic Mixing:</strong> Wwise Effect Bus routing controlled by runtime <code>RTPCs</code>.</li>
+                <li><strong>Queue System:</strong> Implemented a queue to manage rapid-fire audio events without cutting off effect tails.</li>
+                <li><strong>Data-Driven Design:</strong> Used Unity <code>ScriptableObjects</code> to store audio config data, separating data from behaviour.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection">
+        <h3>C++ & DSP: Audio Effects Plugins</h3>
+        <div class="game-pair" style="gap: 2rem; align-items: center;">
+          
+          <div class="video-item" style="flex: 1.5 1 600px;">
+            <img 
+              src="media/daeCode26.png" 
+              alt="C++ Compressor Code" 
+              style="
+                width: 80%; 
+                max-width: none; 
+                height: auto; 
+                border: 2px solid rgba(255,255,255,0.5); 
+                border-radius: 8px; 
+                box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+              "
+            >
+            <p class="caption">C++ Implementation of RMS Envelope Tracking</p>
+          </div>
+
+          <div class="video-item" style="flex: 1 1 400px; align-items: flex-start;">
+            <p>
+              Developed real-time audio effects plugins using <strong>C++</strong> and the <strong>JUCE framework</strong>.
+            </p>
+            
+            <div class="tech-breakdown">
+              <h4>Compressor Plugin:</h4>
+              <p>Implemented a feed-forward compressor with variable attack/release/hold. 
+              Engineered the RMS envelope follower in C++ to track signal amplitude with smoothing coefficients.</p>
+            </div>
+            
+            <div class="tech-breakdown">
+              <h4>Wavelet Restoration (MATLAB):</h4>
+              <p>Engineered a restoration algorithm using Discrete Wavelet Transforms (DWT) to isolate and remove vintage vinyl crackle without affecting transient fidelity.</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
     <!-- MUSIC SECTION -->
     <div class="section" id="music">
       <h2>Music</h2>
